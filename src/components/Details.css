@@ -1,0 +1,115 @@
+.details-container {
+    border: solid 1px #ccc; /* Lighter border for a clean look */
+    display: flex;
+    flex-direction: column;
+    padding: 8px; /* Reduced padding */
+    margin: 10px auto; /* Center align the component */
+    max-width: 600px; /* Limit the maximum width of the component */
+    font-size: 0.9rem; /* Slightly smaller font size for compactness */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for aesthetics */
+    background-color: #fdf8e2; /* Optional: light background for contrast */
+  }
+  
+  .details-content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced spacing between sections */
+  }
+  
+  .details-item {
+    display: flex;
+    align-items: flex-start; /* Align items at the start */
+    gap: 5px; /* Small gap between elements */
+  }
+  
+  .details-heading {
+    color: #EE4E4E;
+    font-weight: bold;
+    margin: 0;
+    font-size: 1rem; /* Slightly smaller heading size */
+  }
+  
+  .details-location {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Space between the link and button */
+  }
+  
+  .address-link {
+    color: blue;
+    text-decoration: underline;
+    font-size: 0.9rem; /* Smaller text for compact layout */
+  }
+  
+  .copy-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center; /* Align text and icon vertically */
+    gap: 3px; /* Reduced gap between text and icon */
+    padding: 3px 6px; /* Smaller padding for compact button */
+    border-radius: 3px; /* Subtle rounding for aesthetics */
+    background-color: lightgray; /* Optional for button visibility */
+    max-width: fit-content;
+  }
+  
+  .copy-icon {
+    width: 10px; /* Reduced icon size */
+    height: 10px; /* Reduced icon size */
+  }
+  
+  .copy-text {
+    font-size: 0.75rem; /* Smaller font size for the button */
+    color: black;
+  }
+  
+  .header {
+    text-align: center;
+    font-size: 1.2rem; /* Reduced header size */
+    margin-bottom: 8px; /* Slightly smaller spacing below the header */
+  }
+  
+  .mta-line {
+    display: inline-block;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 50%;
+    padding: 3px 6px; /* Smaller padding for icons */
+    margin: 2px; /* Reduced spacing between icons */
+    font-size: 0.8rem; /* Compact text for transportation lines */
+  }
+  
+  .mta-f {
+    background-color: #ff6319;
+  }
+  
+  .mta-j {
+    background-color: #996633;
+  }
+  
+  .mta-z {
+    background-color: #996633;
+  }
+  
+  .mta-m {
+    background-color: #ff6319;
+  }
+  
+  .mta-l {
+    background-color: #a7a9ac;
+  }
+  
+  .mta-bus {
+    background-color: #007ac9;
+    border-radius: 3px; /* Slightly smaller corners for buses */
+    padding: 2px 4px; /* Compact bus styling */
+  }
+  
+  iframe {
+    width: 100%; /* Make the map iframe responsive */
+    height: 180px; /* Slightly smaller height */
+    border: none; /* Remove border */
+  }
+  
