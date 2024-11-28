@@ -1,92 +1,103 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Validate.css';
 import guests_db from '../backend/Supabaseclient';
+import mySprite from '../assets/8bit-me.png';
 
 function Validate() {
-  const [firstName, setFirstName] = useState('');            // State for first name
-  const [lastInitial, setLastInitial] = useState('');       // State for last initial
-  const [errorMessage, setErrorMessage] = useState('');     // State for error messages
-  const reroute = useNavigate();                           // React Router hook for navigation
+  const [firstName, setFirstName] = useState('');
+  const [lastInitial, setLastInitial] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleValidation = async (e) => {
-    e.preventDefault(); // Prevent default form behavior
-    setErrorMessage(''); // Reset error message
+    e.preventDefault();
+    setErrorMessage('');
 
-    // Validation checks
-    if (!firstName || /\s/.test(firstName)) {
+    // Trim whitespace and enforce lowercase
+    const sanitizedFirstName = firstName.trim().toLowerCase();
+    const sanitizedLastInitial = lastInitial.trim().toLowerCase();
+
+    // Validate inputs
+    if (!sanitizedFirstName || /\s/.test(sanitizedFirstName)) {
       setErrorMessage('First name cannot contain spaces and must not be empty.');
       return;
     }
-    if (lastInitial.length !== 1) {
-      setErrorMessage('Last initial must be exactly one character.');
+    if (sanitizedFirstName.length > 15) {
+      setErrorMessage('First name cannot exceed 15 characters.');
+      return;
+    }
+    if (sanitizedLastInitial.length !== 1 || !/^[a-z]$/.test(sanitizedLastInitial)) {
+      setErrorMessage('Last initial must be exactly one lowercase letter.');
       return;
     }
 
     try {
-      // Query the guests database
       const { data, error } = await guests_db
         .from('guests')
         .select('*')
-        .eq('first_name', firstName)
-        .eq('last_initial', lastInitial);
+        .eq('first_name', sanitizedFirstName)
+        .eq('last_initial', sanitizedLastInitial);
 
       if (error) {
-        console.error('Error fetching guest:', error);
         setErrorMessage('An error occurred. Please try again later.');
         return;
       }
 
       if (!data || data.length === 0) {
-        // No guest found
-        reroute('/noinvite');
+        navigate('/noinvite');
       } else {
-        // Guest found
         const guest = data[0];
-        if (guest.going === 1) {
-            reroute(`/going/${guest.id}`);;
-        } else if (guest.going === 0) {
-            reroute(`/going/${guest.id}`);;
-        } else {
-            reroute(`/purgatory/${guest.id}`);;
-        }
+        if (guest.going === 1) navigate(`/going/${guest.id}`);
+        else if (guest.going === 0) navigate(`/notgoing/${guest.id}`);
+        else navigate(`/purgatory/${guest.id}`);
       }
-    } catch (err) {
-      console.error('Validation error:', err);
+    } catch {
       setErrorMessage('An unexpected error occurred. Please try again.');
     }
   };
 
   return (
-    <div>
-      <h1>Validate</h1>
-      <form onSubmit={handleValidation}>
-        <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input
-            type="text"
-            id="firstName"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value.toLowerCase().replace(/\s/g, ''))} // Force lowercase and remove spaces
-            required
-            placeholder="Enter your first name"
-          />
+    <div className="validate-content">
+      <div className="dialog-and-sprite">
+        <img src={mySprite} className="my-sprite" alt="8bit-loydsprite" />
+        <div className="message-box">
+          <p>Hello! Please identify yourself!</p>
         </div>
-        <div>
-          <label htmlFor="lastInitial">Last Initial:</label>
-          <input
-            type="text"
-            id="lastInitial"
-            value={lastInitial}
-            onChange={(e) =>
-              setLastInitial(e.target.value.toLowerCase().slice(0, 1)) // Force lowercase and limit to one character
-            }
-            required
-            placeholder="Enter your last initial"
-          />
-        </div>
-        <button type="submit">Submit</button>
-      </form>
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      </div>
+      <div className="response-box">
+        <form onSubmit={handleValidation}>
+          <div className="form-field">
+            <label htmlFor="firstName">First Name:</label>
+            <input
+              type="text"
+              id="firstName"
+              value={firstName}
+              maxLength={15} // Restrict input to 15 characters
+              onChange={(e) => {
+                // Prevent spaces and restrict to max length
+                const sanitizedValue = e.target.value.replace(/\s+/g, '').slice(0, 15);
+                setFirstName(sanitizedValue);
+              }}
+            />
+          </div>
+          <div className="form-field">
+            <label htmlFor="lastInitial">Last Initial:</label>
+            <input
+              type="text"
+              id="lastInitial"
+              value={lastInitial}
+              onChange={(e) => {
+                // Restrict to a single character
+                const sanitizedValue = e.target.value.slice(0, 1);
+                setLastInitial(sanitizedValue);
+              }}
+            />
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+      </div>
     </div>
   );
 }
