@@ -1,0 +1,51 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+  margin: 0;
+  padding: 0;
+  background-color: #F6EEC9;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #799351;
+}
+
+.home-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.cake-gif {
+  height: 300px;
+  width: 300px;
+}
+
+.rotating-text-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 400px; /* Fixed width for the board */
+  height: 50px; /* Fixed height for the board */
+  background-color: black; /* Retro black background */
+  border: 4px solid #A1DD70; /* Retro green border */
+  border-radius: 8px; /* Rounded corners */
+  margin: 20px 0;
+  overflow: hidden; /* Ensure text stays within boundaries */
+}
+
+.rotating-text-board h2 {
+  margin: 0;
+  color: #A1DD70; /* Retro green text */
+  font-size: 16px;
+  white-space: nowrap; /* Ensure single-line rendering */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis if needed */
+  cursor: pointer; /* Make the text look clickable */
+}
+
+.rotating-text-board h2:hover {
+  text-decoration: underline; /* Optional hover effect */
+}
