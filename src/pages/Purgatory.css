@@ -1,48 +1,82 @@
 .validate-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-    gap: 20px; /* Add spacing between the sprite/dialog and the response box */
-    margin: 2%;
-  }
-  
-  .dialog-and-sprite {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px; /* Space between sprite and message box */
-  }
-  
-  .my-sprite {
-    height: 150px;
-    width: 150px;
-    image-rendering: pixelated; /* Ensure pixel art looks sharp */
-  }
-  
-  .message-box {
-    background-color: #F6EEC9; /* Light retro beige */
-    border: 4px solid #A1DD70; /* Retro green border */
-    border-radius: 8px; /* Slight rounding for a modern-retro feel */
-    padding: 15px;
-    color: #A1DD70;
-    font-size: 14px;
-    width: 300px;
-    text-align: left; /* Align text to look like a dialog box */
-  }
-  
-  .response-box {
-    background-color: #799351; /* Dark green box */
-    border: 4px solid #A1DD70; /* Retro green border */
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Add spacing between input fields and the button */
-    align-items: center;
-    width: 320px;
-  }
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;
+  justify-content: flex-start; /* Align items at the top */
+  min-height: 100vh; /* Ensure the container takes full viewport height */
+  padding: 20px; /* Add spacing around the content */
+  gap: 20px; /* Space between sections */
+  box-sizing: border-box; /* Ensure padding and border are included */
+}
+
+.dialog-and-sprite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px; /* Space between the sprite and message box */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+.my-sprite {
+  height: 150px;
+  width: 150px;
+  image-rendering: pixelated; /* Ensure pixel art stays sharp */
+}
+
+.message-box {
+  background-color: #F6EEC9; /* Retro beige */
+  border: 4px solid #A1DD70; /* Green border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 15px;
+  color: #A1DD70;
+  font-size: 14px;
+  width: 300px;
+  text-align: left; /* Align text for a dialog look */
+}
+
+.details-wrapper {
+  max-height: 400px; /* Constrain max height */
+  width: 100%; /* Allow full width initially */
+  max-width: 600px; /* Constrain maximum width */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  margin: 0 auto; /* Center the container */
+  padding: 15px;
+  border: 2px solid #888; /* Subtle border */
+  background-color: #F6EEC9; /* Retro beige */
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.response-box {
+  background-color: #799351; /* Dark green */
+  border: 4px solid #A1DD70; /* Green border */
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add spacing between items */
+  align-items: center;
+  width: 100%;
+  max-width: 320px; /* Constrain width */
+}
+
+.details-button {
+  padding: 10px;
+  background-color: #F6EEC9; /* Light beige */
+  border: 2px solid #799351; /* Green border */
+  color: #EE4E4E; /* Red text */
+  font-family: 'Press Start 2P', cursive;
+  font-size: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.details-button:hover {
+  background-color: #A1DD70; /* Green hover */
+  color: #F6EEC9; /* Contrast text */
+}
+
   
   .form-field {
     display: flex;
