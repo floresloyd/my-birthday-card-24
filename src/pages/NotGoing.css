@@ -13,7 +13,7 @@ html, body {
   min-height: 100vh; /* Full viewport height */
   text-align: center;
   padding: 20px;
-  padding-top: 150px; /* Add space at the top */
+  padding-top: 250px; /* Add space at the top */
   margin: 0 auto; /* Center the container horizontally */
   max-width: 600px; /* Restrict the width to make it fit better on mobile */
   box-sizing: border-box;
