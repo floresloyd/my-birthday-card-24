@@ -81,6 +81,7 @@ function Eda() {
     3: "Apple",
     4: "Kyndryl",
     5: "Filipino Community",
+    null: "Pending"
   };
 
   const goingChartData = {
