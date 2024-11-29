@@ -13,8 +13,10 @@ html, body {
   min-height: 100vh; /* Full viewport height */
   text-align: center;
   padding: 20px;
+  padding-top: 100px; /* Add space at the top */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 600px; /* Restrict the width to make it fit better on mobile */
   box-sizing: border-box;
-  margin: 0;
 }
 
 h1 {
@@ -22,11 +24,13 @@ h1 {
   margin-bottom: 20px;
 }
 
+
 .button-container {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Space between buttons */
+  gap: 10px; /* Space between buttons */
   margin-top: 15px;
+  flex-wrap: wrap; /* Allow buttons to stack on smaller screens */
 }
 
 button {
@@ -44,4 +48,29 @@ button:hover {
 
 button:active {
   background-color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .going-container {
+    max-width: 95%; /* Use more screen width for smaller devices */
+    padding: 10px;
+  }
+
+  .info-box {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .going-container,
+  .not-going-container {
+      max-width: 90%;
+      padding: 15px; /* Adjust for more space on mobile */
+  }
 }

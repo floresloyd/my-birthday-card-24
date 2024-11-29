@@ -3,7 +3,7 @@ import "./NoInvite.css";
 function NoInvite() {
     return (
         <div>
-           <h1> error 403 not found </h1> 
+           <h1> error 404 file not found </h1> 
         </div>
     )
 }

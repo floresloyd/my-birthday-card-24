@@ -1,47 +1,91 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+
 .not-going-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  min-height: 100vh; /* Full viewport height */
+  text-align: center;
+  padding: 20px;
+  padding-top: 150px; /* Add space at the top */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 600px; /* Restrict the width to make it fit better on mobile */
+  box-sizing: border-box;
+ }
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.not-going-container h1 {
+  font-size: .9rem;
+  color: red; /* Differentiation for "Not Going" */
+  margin-bottom: 20px;
+}
+
+.info-box {
+  margin: 20px auto; /* Center horizontally */
+  padding: 15px;
+  width: 100%; /* Use full width of the container */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add light shadow */
+  text-align: left; /* Align text to the left for better readability */
+}
+
+.not-button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+  margin-top: 15px;
+  flex-wrap: wrap; /* Allow buttons to stack on smaller screens */
+}
+
+.not-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f4f4f4;
+}
+
+.not-button:hover {
+  background-color: #ddd;
+}
+
+.not-button:active {
+  background-color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .not-going-container {
+    max-width: 95%; /* Use more screen width for smaller devices */
+    padding: 10px;
   }
 
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  .info-box {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
   }
-  
-  
-  .not-going-container h1 {
-    font-size: 2rem;
-    color: red; /* Unique color for differentiation */
-    margin-bottom: 20px;
-  }
-  
-  .not-button-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-  }
-  
+
   .not-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #f4f4f4;
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
-  
-  .not-button:hover {
-    background-color: #ddd;
+}
+
+@media (max-width: 768px) {
+  .going-container,
+  .not-going-container {
+      max-width: 90%;
+      padding: 15px; /* Adjust for more space on mobile */
   }
-  
-  .not-button:active {
-    background-color: #ccc;
-  }
-  
+}

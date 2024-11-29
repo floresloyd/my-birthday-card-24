@@ -2,18 +2,19 @@
     width: 100%;
     max-width: 900px;
     padding: 20px;
+    padding-top: 100px; /* Add space at the top */
     text-align: center;
     box-sizing: border-box;
   }
   
   .title {
-    font-size: 20px;
+    font-size: 15px;
     margin-bottom: 10px;
     color: #333;
   }
   
   .section-title {
-    font-size: 16px;
+    font-size: 15px;
     color: red;
     margin: 15px 0;
   }
@@ -36,6 +37,9 @@
     margin: 5px 0;
   }
   
+  p{
+    font-size: 10px;
+  }
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .charts-row {

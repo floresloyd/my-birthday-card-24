@@ -61,21 +61,19 @@ function Going() {
   };
 
   return (
-    <div className="going-container">
-      <h1>
-      <h1>
-        {guest
-          ? `See you ${guest.first_name.charAt(0).toUpperCase()}${guest.first_name.slice(1)}!`
-          : "Loading..."}
-      </h1>
-
-      </h1>
-      <Details />
-      <div className="button-container">
-        <button onClick={handleRerouteToEDA}>Demographics</button>
-        <button onClick={updateStatusToNotGoing}>Change Status to Not Going</button>
-      </div>
+  <div className="going-container">
+    <h1>
+      {guest
+        ? `See you ${guest.first_name.charAt(0).toUpperCase()}${guest.first_name.slice(1)}!`
+        : "Loading..."}
+    </h1>
+    <Details />
+    <div className="button-container">
+      <button onClick={handleRerouteToEDA}>Demographics</button>
+      <button onClick={updateStatusToNotGoing}>Change Status to Not Going</button>
     </div>
+  </div>
+
   );
 }
 
