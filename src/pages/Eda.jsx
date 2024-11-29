@@ -85,7 +85,7 @@ function Eda() {
   };
 
   const goingChartData = {
-    labels: ["Going", "Not Going", "No Response"],
+    labels: ["Going", "Not Going", "Pending Response"],
     datasets: [
       {
         data: [goingCount, notGoingCount, noResponseCount],

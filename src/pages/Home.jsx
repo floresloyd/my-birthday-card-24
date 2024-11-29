@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 function Home() {
   const reroute = useNavigate(); // Hook used to reroute
-  const phrases = [ "Celebrating", "Loyd's 24th Birthday", "& College Graduation", "Click Here"];
+  const phrases = [ "Celebrating", "Loyd's 24th", "Birthday", "& College", "Graduation!", "Click Here"];
   const [currentPhrase, setCurrentPhrase] = useState(phrases[0]);
   const [index, setIndex] = useState(0); // Manage the index of phrases
 
