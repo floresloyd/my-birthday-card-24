@@ -129,7 +129,7 @@ function Eda() {
     <>
       <p>Going: {goingCount} guest(s) ({((goingCount / totalGuests) * 100).toFixed(2)}%)</p>
       <p>Not Going: {notGoingCount} guest(s) ({((notGoingCount / totalGuests) * 100).toFixed(2)}%)</p>
-      <p>No Response: {noResponseCount} guest(s) ({((noResponseCount / totalGuests) * 100).toFixed(2)}%)</p>
+      <p>Pending: {noResponseCount} guest(s) ({((noResponseCount / totalGuests) * 100).toFixed(2)}%)</p>
     </>
   );
 
