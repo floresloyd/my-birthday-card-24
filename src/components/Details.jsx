@@ -107,10 +107,13 @@ function Details() {
         <div className="details-item">
           <h3 className="details-heading">ADDITIONAL INFO:</h3>
           <ul>
+            <li>
+                BYOB! 
+            </li>
             <li>Apartment itself is quite small, prepare to be squeezed!</li>
             <li>
               There is also a rooftop but it might be cold, so please bring a jacket
-              and a hat! (Or just drink a lot!)
+              and a hat! (Or just drink a lot of alcohol!)
             </li>
           </ul>
         </div>
