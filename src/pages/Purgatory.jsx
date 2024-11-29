@@ -13,6 +13,7 @@ function Purgatory() {
   const [goingStatus, setGoingStatus] = useState(null);
   const [firstName, setFirstName] = useState(""); // State for first name
   const [showDetails, setShowDetails] = useState(false); // State for Details visibility
+  const [plusOnes, setPlusOnes] = useState(0); // State for number of guests
 
   // Fetch first name from the database
   useEffect(() => {
@@ -39,15 +40,18 @@ function Purgatory() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const meetOptionMapping = {
       family: 0,
       qc: 1,
       mcdonalds: 2,
+      apple: 3,
+      kyndryl: 4,
+      filipino: 5,
     };
-  
+
     const meetOptionValue = meetOptionMapping[meetOption];
-  
+
     // Validate form inputs
     if (meetOptionValue === undefined) {
       alert("Please select how we met before submitting.");
@@ -57,17 +61,18 @@ function Purgatory() {
       alert("Please select if you are going or not before submitting.");
       return;
     }
-  
+
     try {
       // Update the Supabase database
-        const { error } = await guests_db
+      const { error } = await guests_db
         .from("guests")
         .update({
           going: goingStatus,
           meet_id: meetOptionValue, // Use correct column name
+          num_plus_one: goingStatus === 1 ? plusOnes : 0, // Only update plus ones if "Going"
         })
         .eq("id", id);
-  
+
       if (error) {
         console.error("Error updating status:", error);
         alert("Failed to update status. Please try again.");
@@ -85,7 +90,7 @@ function Purgatory() {
       alert("Something went wrong. Please try again.");
     }
   };
-  
+
   return (
     <div className="validate-content">
       <div className="dialog-and-sprite">
@@ -96,22 +101,22 @@ function Purgatory() {
             <span className="red-name">
               {firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase() || "Guest"}
             </span>
-            , you are invited to my birthday party! I just need to know if...
+            , you are invited to my birthday party and graduation celebration! I just need to know ...
           </p>
         </div>
       </div>
 
-              {/* Details Button */}
-        <button
-          type="button"
-          className="details-button"
-          onClick={() => setShowDetails((prev) => !prev)}
-        >
-          {showDetails ? "Hide Details" : "Show Details"}
-        </button>
+      {/* Details Button */}
+      <button
+        type="button"
+        className="details-button"
+        onClick={() => setShowDetails((prev) => !prev)}
+      >
+        {showDetails ? "Hide Details" : "Show Details"}
+      </button>
 
-        {/* Conditionally Rendered Details Component */}
-        {showDetails && <Details />}
+      {/* Conditionally Rendered Details Component */}
+      {showDetails && <Details />}
 
       <div className="response-box">
         <form onSubmit={handleSubmit}>
@@ -148,8 +153,40 @@ function Purgatory() {
               <option value="family">Family</option>
               <option value="qc">Queens College</option>
               <option value="mcdonalds">McDonald&apos;s</option>
+              <option value="apple">Apple</option>
+              <option value="kyndryl">Kyndryl</option>
+              <option value="filipino">Filipino Community</option>
             </select>
           </div>
+
+          {/* Conditional Rendering of Plus Ones Field */}
+          {goingStatus === 1 && (
+            <div className="form-field">
+              <label htmlFor="plusOnes">How many guests are you bringing?</label>
+              <div className="plus-minus-container">
+                <button
+                  type="button"
+                  className="plus-minus-button"
+                  onClick={() => setPlusOnes((prev) => Math.max(prev - 1, 0))}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  id="plusOnes"
+                  value={plusOnes}
+                  readOnly
+                />
+                <button
+                  type="button"
+                  className="plus-minus-button"
+                  onClick={() => setPlusOnes((prev) => Math.min(prev + 1, 3))}
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          )}
 
           {/* Submit Button */}
           <button type="submit">Submit</button>

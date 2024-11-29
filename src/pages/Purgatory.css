@@ -3,8 +3,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: 80vh;
     gap: 20px; /* Add spacing between the sprite/dialog and the response box */
+    margin: 2%;
   }
   
   .dialog-and-sprite {
@@ -165,3 +166,44 @@
     color: #f6eec9; /* Contrast text */
   }
   
+
+  .plus-minus-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .plus-minus-button {
+    width: 30px;
+    height: 30px;
+    background-color: #F6EEC9; /* Light beige */
+    border: 2px solid #799351; /* Green border */
+    color: #EE4E4E; /* Red text */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0px 4px #A1DD70;
+    transition: all 0.2s ease;
+  }
+  
+  .plus-minus-button:hover {
+    background-color: #A1DD70;
+    color: #F6EEC9;
+  }
+  
+  .plus-minus-button:active {
+    box-shadow: 0px 0px #799351;
+    transform: translateY(2px);
+  }
+  
+  input#plusOnes {
+    width: 50px;
+    text-align: center;
+    font-size: 14px;
+    border: 2px solid #A1DD70;
+    background-color: #799351;
+    color: #FFF;
+    font-family: 'Press Start 2P', cursive;
+  }
