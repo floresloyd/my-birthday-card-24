@@ -1,26 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import guests_db from "../backend/Supabaseclient";
+import "./Purgatory.css";
+import mySprite from "../assets/8bit-me.png";
+import Details from "../components/Details";
 
 function Purgatory() {
-  const { id } = useParams(); // Get the guest's ID from the URL
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  const [meetOption, setMeetOption] = useState(""); // State to store dropdown selection
-  const [goingStatus, setGoingStatus] = useState(null); // State to store radio button selection
+  const [meetOption, setMeetOption] = useState("");
+  const [goingStatus, setGoingStatus] = useState(null);
+  const [firstName, setFirstName] = useState(""); // State for first name
+  const [showDetails, setShowDetails] = useState(false); // State for Details visibility
 
-  const handleSubmit = async () => {
+  // Fetch first name from the database
+  useEffect(() => {
+    const fetchFirstName = async () => {
+      try {
+        const { data, error } = await guests_db
+          .from("guests")
+          .select("first_name")
+          .eq("id", id)
+          .single(); // Fetch a single record
 
-    // Map options to numerical values for easier database management
+        if (error) {
+          console.error("Error fetching first name:", error);
+        } else {
+          setFirstName(data.first_name); // Update state with fetched name
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching first name:", err);
+      }
+    };
+
+    fetchFirstName();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
     const meetOptionMapping = {
       family: 0,
       qc: 1,
       mcdonalds: 2,
     };
-
+  
     const meetOptionValue = meetOptionMapping[meetOption];
-
-    // Validation for both dropdown and radio button
+  
+    // Validate form inputs
     if (meetOptionValue === undefined) {
       alert("Please select how we met before submitting.");
       return;
@@ -29,22 +57,27 @@ function Purgatory() {
       alert("Please select if you are going or not before submitting.");
       return;
     }
-
+  
     try {
-      const { error } = await guests_db
+      // Update the Supabase database
+        const { error } = await guests_db
         .from("guests")
-        .update({ going: goingStatus, meet_option: meetOptionValue }) // Update going status and meet option
+        .update({
+          going: goingStatus,
+          meet_id: meetOptionValue, // Use correct column name
+        })
         .eq("id", id);
-
+  
       if (error) {
         console.error("Error updating status:", error);
         alert("Failed to update status. Please try again.");
       } else {
         alert("Your response has been recorded!");
+        // Navigate based on the user's "going" status
         if (goingStatus === 1) {
-          navigate(`/going/${id}`); // Navigate to the "going" route
-        } else if (goingStatus === 0) {
-          navigate(`/notgoing/${id}`); // Navigate to the "not going" route
+          navigate(`/going/${id}`);
+        } else {
+          navigate(`/notgoing/${id}`);
         }
       }
     } catch (err) {
@@ -52,61 +85,75 @@ function Purgatory() {
       alert("Something went wrong. Please try again.");
     }
   };
-
+  
   return (
-    <div>
-      <h1>Purgatory</h1>
-      <h2>Are you going to my birthday party or not?</h2>
-      <p>Please fill out the form below to let us know your response.</p>
+    <div className="validate-content">
+      <div className="dialog-and-sprite">
+        <img src={mySprite} className="my-sprite" alt="8bit-loydsprite" />
+        <div className="message-box">
+          <p>
+            Hey{" "}
+            <span className="red-name">
+              {firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase() || "Guest"}
+            </span>
+            , you are invited to my birthday party! I just need to know if...
+          </p>
+        </div>
+      </div>
 
-      {/* Dropdown for how you met */}
-      <div>
-        <label htmlFor="meetOption">How did I meet you?</label>
-        <select
-          id="meetOption"
-          value={meetOption}
-          onChange={(e) => setMeetOption(e.target.value)}
-          required
+              {/* Details Button */}
+        <button
+          type="button"
+          className="details-button"
+          onClick={() => setShowDetails((prev) => !prev)}
         >
-          <option value="">Select an option</option>
-          <option value="family">Family</option>
-          <option value="qc">Queens College</option>
-          <option value="mcdonalds">McDonalds</option>
-        </select>
-      </div>
+          {showDetails ? "Hide Details" : "Show Details"}
+        </button>
 
-      {/* Radio buttons for going or not going */}
-      <div>
-        <p>Will you be attending?</p>
-        <label>
-          <input
-            type="radio"
-            name="goingStatus"
-            value="1"
-            onChange={() => setGoingStatus(1)}
-          />
-          Yes, Im going!
-        </label>
-        <br />
-        <label>
-          <input
-            type="radio"
-            name="goingStatus"
-            value="0"
-            onChange={() => setGoingStatus(0)}
-          />
-          No, I cant make it.
-        </label>
-      </div>
+        {/* Conditionally Rendered Details Component */}
+        {showDetails && <Details />}
 
-      {/* Submit button */}
-      <button onClick={handleSubmit}>Submit</button>
+      <div className="response-box">
+        <form onSubmit={handleSubmit}>
+          {/* Going/Not Going Buttons */}
+          <div className="form-field">
+            <label>Are you going?</label>
+            <div className="toggle-container">
+              <button
+                type="button"
+                className={`toggle-button ${goingStatus === 0 ? "selected" : ""}`}
+                onClick={() => setGoingStatus(0)}
+              >
+                Not Going
+              </button>
+              <button
+                type="button"
+                className={`toggle-button ${goingStatus === 1 ? "selected" : ""}`}
+                onClick={() => setGoingStatus(1)}
+              >
+                Going
+              </button>
+            </div>
+          </div>
 
-      <div>
-        <h3>Birthday Party Details:</h3>
-        <p>Date: [Insert Date]</p>
-        <p>Location: [Insert Location]</p>
-        <p>Time: [Insert Time]</p>
+          {/* Dropdown Menu */}
+          <div className="form-field">
+            <label htmlFor="meetOption">How did we meet?</label>
+            <select
+              id="meetOption"
+              value={meetOption}
+              onChange={(e) => setMeetOption(e.target.value)}
+            >
+              <option value="">Select an option</option>
+              <option value="family">Family</option>
+              <option value="qc">Queens College</option>
+              <option value="mcdonalds">McDonald&apos;s</option>
+            </select>
+          </div>
+
+          {/* Submit Button */}
+          <button type="submit">Submit</button>
+        </form>
       </div>
     </div>
   );
