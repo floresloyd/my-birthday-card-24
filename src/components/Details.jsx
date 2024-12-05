@@ -99,8 +99,7 @@ function Details() {
         <div className="details-item">
           <h3 className="details-heading">SCHEDULE:</h3>
           <ul>
-            <li>5-8 PM: Early with Food</li>
-            <li>8 PM - Late: Drinks</li>
+            <li>8 PM Drinks</li>
           </ul>
         </div>
 
