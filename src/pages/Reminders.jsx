@@ -108,9 +108,9 @@ function Reminders() {
           <h3 className="details-heading">ADDITIONAL INFO:</h3>
           <ul>
             <li>Whiteclaw + Corona will be served, but please BRING HARD LIQUOR!</li>
-            <li>The apartment is small, so prepare to be cozy!</li>
-            <li>The rooftop might be cold, so bring a jacket or just drink more!</li>
-            <li>Sorry, no food will be served!</li>
+            <li>The apartment is small, so prepare to be squeezed!</li>
+            <li>The rooftop might be cold, so wear warm clothes, bring a hat, and just drink more!</li>
+            <li>Sorry, no meals will be served just finger food!</li>
           </ul>
         </div>
 
