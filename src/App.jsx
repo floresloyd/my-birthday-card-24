@@ -7,6 +7,7 @@ import Purgatory from "./pages/Purgatory";
 import NotGoing from "./pages/NotGoing";
 import NoInvite from "./pages/NoInvite";
 import Eda from "./pages/Eda";
+import Reminders from "./pages/Reminders";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/purgatory/:id' element={<Purgatory/>} />
           <Route path='/eda' element={<Eda/>} />
           <Route path='/noinvite' element={<NoInvite/>} />
+          <Route path='/reminders' element={<Reminders/>} />
         </Routes>
       </BrowserRouter>
     </div>

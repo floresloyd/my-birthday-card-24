@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import "./Details.css";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import "./Reminders.css";
 import copyIcon from "../assets/copy.png";
 
-function Details() {
+function Reminders() {
   const [countdown, setCountdown] = useState("");
-  const birthday = new Date("2024-12-07T20:00:00"); // Set to December 7, 2024, at 5:00 PM
+  const birthday = new Date("2024-12-07T20:00:00"); // Set to December 7, 2024, at 8:00 PM
   const address = "Apt 2B, 178 E 2nd St, New York, NY, 10009";
   const mapsLink = `https://www.google.com/maps/place/${encodeURIComponent(
     "178 E 2nd St, New York, NY, 10009"
@@ -41,11 +42,11 @@ function Details() {
   };
 
   return (
-    <div className="details-wrapper">
-      <h1 className="header"><u>Details</u></h1>
+    <div className="reminders-page">
+      <h1 className="header"><u>Reminders</u></h1>
       <div className="details-container">
         <div className="details-item">
-          <h1 className="details-heading">WHAT: </h1>
+          <h1 className="details-heading">WHAT:</h1>
           <p>Loyd&apos;s 24th Birthday and Graduation Party!</p>
         </div>
         <div className="details-item">
@@ -54,34 +55,34 @@ function Details() {
           <p>Countdown: <span className="countdown">{countdown}</span></p>
         </div>
         <div className="details-item">
-  <h1 className="details-heading">WHERE: Inside Appartment && Rooftop!</h1>
-  <div className="details-location">
-    <p>
-      <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="address-link">
-        {address}
-      </a>
-      <img
-        src={copyIcon}
-        alt="Copy Address"
-        className="copy-icon"
-        onClick={copyToClipboard}
-        title="Copy to clipboard"
-      />
-    </p>
-  </div>
-  <iframe
-    title="Google Maps"
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.908474653032!2d-73.98458168459399!3d40.72330647933116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598b8154f59f%3A0xff19c03a75263da7!2s178%20E%202nd%20St%2C%20New%20York%2C%20NY%2010009%2C%20USA!5e0!3m2!1sen!2sus!4v1699025690324!5m2!1sen!2sus"
-    width="300"
-    height="200"
-    style={{ border: "0" }}
-    allowFullScreen=""
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-  ></iframe>
-</div>
+          <h1 className="details-heading">WHERE:</h1>
+          <div className="details-location">
+            <p>
+              <a href={mapsLink} target="_blank" rel="noopener noreferrer" className="address-link">
+                {address}
+              </a>
+              <img
+                src={copyIcon}
+                alt="Copy Address"
+                className="copy-icon"
+                onClick={copyToClipboard}
+                title="Copy to clipboard"
+              />
+            </p>
+          </div>
+          <iframe
+            title="Google Maps"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.908474653032!2d-73.98458168459399!3d40.72330647933116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2598b8154f59f%3A0xff19c03a75263da7!2s178%20E%202nd%20St%2C%20New%20York%2C%20NY%2010009%2C%20USA!5e0!3m2!1sen!2sus!4v1699025690324!5m2!1sen!2sus"
+            width="100%"
+            height="300"
+            style={{ border: "0" }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
         <div className="details-item">
-          <h3 className="details-heading">LOGISTICS: </h3>
+          <h3 className="details-heading">LOGISTICS:</h3>
           <p>
             <strong>Transportation lines:</strong>
             <span className="mta-line mta-f">F</span>
@@ -93,7 +94,7 @@ function Details() {
             <span className="mta-line mta-bus">M15+</span>
             <span className="mta-line mta-bus">M21</span>
           </p>
-          <p> <strong>Parking:</strong> Street Parking </p>
+          <p><strong>Parking:</strong> Street Parking</p>
         </div>
 
         <div className="details-item">
@@ -106,22 +107,22 @@ function Details() {
         <div className="details-item">
           <h3 className="details-heading">ADDITIONAL INFO:</h3>
           <ul>
-            <li>
-                Whiteclaw + Corona will be served but please BRING HARD LIQUOR!  
-            </li>
-            <li>Apartment itself is quite small, prepare to be squeezed!</li>
-            <li>
-              There is also a rooftop but it might be cold, so please bring a jacket
-              and a hat! (Or just drink a lot of alcohol!)
-            </li>
-            <li>
-              I will not be serving food! s0rrY!
-            </li>
+            <li>Whiteclaw + Corona will be served, but please BRING HARD LIQUOR!</li>
+            <li>The apartment is small, so prepare to be cozy!</li>
+            <li>The rooftop might be cold, so bring a jacket or just drink more!</li>
+            <li>Sorry, no food will be served!</li>
           </ul>
+        </div>
+
+        <div className="details-item">
+          <h3 className="details-heading">WHO ELSE IS GOING?</h3>
+          <p>
+            <Link to="/eda" className="who-else-link">CLICK HERE TO SEE WHO ELSE IS GOING</Link>
+          </p>
         </div>
       </div>
     </div>
   );
 }
 
-export default Details;
+export default Reminders;
